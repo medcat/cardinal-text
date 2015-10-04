@@ -1,0 +1,30 @@
+.log
+  list-style-type: none
+  margin: 0
+  padding: 0
+
+  &-line
+    background-color: $shadow-color
+    text-shadow: 0 0 1px $gray-color
+    padding: 1em
+
+    & + &
+      border-top: none
+
+    &-error:before
+      color: $error-color
+      content: "\f06a"
+      font-family: "FontAwesome"
+      padding: 0 0.5em
+
+    &-warning:before
+      color: $warning-color
+      content: "\f071"
+      font-family: "FontAwesome"
+      padding: 0 0.5em
+
+    &-info:before
+      color: $info-color
+      content: "\f05a"
+      font-family: "FontAwesome"
+      padding: 0 0.5em
