@@ -1,13 +1,13 @@
 Cardinal.story.dialog do
   language: \en
   content:
-    'stonebrook.southgate.inn.keeper.dialog':
+    '/stonebrook/southgate/inn/keeper/dialog':
       type: \dialog
-      begin: \.welcome
+      begin: \welcome
       content:
         welcome: [
         * type: \text
           content: "Welcome to the Stonebrook Inn!"
         * type: \action
-          content: "-move up"
+          content: ["move up"]
         ]

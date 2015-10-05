@@ -16,8 +16,16 @@ Rake::SprocketsTask.new do |t|
   t.assets = %w(main.js main.css)
 end
 
-task build: [:assets] do
+task :index do
+  File.open('index.html', 'w') do |f|
+    f.write Slim::Template.new('index.slim').render(Object.new)
+  end
+end
+
+task :public_index do
   File.open('public/index.html', 'w') do |f|
     f.write Slim::Template.new('index.slim').render(Object.new)
   end
 end
+
+task build: [:index, :assets]

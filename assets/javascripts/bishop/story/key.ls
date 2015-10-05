@@ -7,15 +7,12 @@ class Bishop.Story.Key
   (@name, @base) !->
 
   @from = (path) ->
-    | typeof(path) == \string =>
-      new Bishop.Story.Key(path)
-    | path instanceof Bishop.Story.Key =>
-      path
-    | otherwise =>
-      throw "Unknown value #{path}"
+    | _.is-string(path)                => new Bishop.Story.Key(path)
+    | path instanceof Bishop.Story.Key => path
+    | _                                => throw "Unknown value #{path}"
 
   relative:~
-    -> @name[0] is \.
+    -> @name[0] isnt \/
 
   path:~
     ->
@@ -26,7 +23,15 @@ class Bishop.Story.Key
     | @full isnt void => @full
     | not @relative   => @full = @name
     | @base is void   => throw "Need a base to resolve"
-    | @base instanceof Bishop.Story.Key =>
-      @full = "#{@base.resolve!}#{@name}"
-    | otherwise =>
-      @full = "#{@base}#{@name}"
+    | otherwise       => @full = @resolve-relative!
+
+  resolve-relative: ->
+    base = | @base instanceof Bishop.Story.Key => @base.resolve!
+           | _ => @base
+    "#{base}/#{@name}"
+      .replace(/([^.]+\/[.]{2})/g, "") # /../
+      .replace(/[.]\//g, "") # /./
+      .replace(/\/{2,}/g. "/") # /
+
+  join: (name) ->
+    new Key(name, this)

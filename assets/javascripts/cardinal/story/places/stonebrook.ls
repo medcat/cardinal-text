@@ -1,21 +1,23 @@
 #= require bishop/story/place
 #= require cardinal/story/places/stonebrook_dialog
 
-Cardinal.story.place \stonebrook (stonebrook) !->
-  stonebrook.cell \.southgate (southgate) !->
+Cardinal.story.place \/stonebrook (stonebrook) !->
+  stonebrook.cell \southgate (southgate) !->
     southgate.door (door) !->
       door.position = \west
-      door.cell = \.inn
+      door.cell = \inn
 
     southgate.door (door) !->
       door.position = \north
-      door.cell = \stonebrook.hall
+      door.cell = \hall
 
     southgate.door (door) !->
       door.position = \east
-      door.cell = \.shop
+      door.cell = \shop
 
-    southgate.cell \.inn (southgate-inn) !->
-      southgate-inn.character \.keeper (keeper) !->
+    southgate.cell \inn (southgate-inn) !->
+      southgate-inn.character \keeper (keeper) !->
         keeper.name "Innkeep"
-        keeper.dialog \.dialog
+        keeper.dialog \dialog
+
+Cardinal.story.variable \/stonebrook/test \boolean 0
